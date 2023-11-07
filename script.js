@@ -1,3 +1,18 @@
+let buttons = document.querySelectorAll('.playerSelection')
+let rock = document.querySelector('.rock')
+let displayResult = document.querySelector('.results')
+let displayScore = document.querySelector('.score');
+// console.log(buttons)
+let score = 0; 
+buttons.forEach((button)=>{
+    let result = button.addEventListener('click',()=>playRound(button.id));
+    if(score===5){
+        displayScore.textContent = `You have won the game with a score of ${score}`
+        
+    }
+})
+
+
 // the random choice of the computer player
 function getComputerChoice(){
     let choices = ['rock', 'paper', 'scissors']
@@ -7,10 +22,11 @@ function getComputerChoice(){
 }
 
 
-let result;
+
 // Let's start the game now 
-function playRound(){
-    let playerSelection = prompt("You choose rock/paper/scissors?: ");
+function playRound(playerSelection){
+    let result;
+    // let playerSelection = prompt("You choose rock/paper/scissors?: ");
     if(playerSelection === null || playerSelection === ''){
         alert('Invalid response')
         return;
@@ -32,22 +48,23 @@ function playRound(){
     else{
         result = "Machines have won, get up and end this dream now"
     }
-    return result
-
-}
-
-let score = 0;
-
-function game(){
-    for(let i = 0; i<5; i++){
-        let result = playRound();
-        console.log(result)
-        if(result === "The humans have proved why they are smarter"){
-            score += 1;
-        }
+    
+    displayResult.textContent = result
+    if(result === "The humans have proved why they are smarter"){
+        score += 1;
     }
-    console.log(score)
+
+    displayScore.textContent = `YOUR CURRENT SCORE IS ${score}`
+
+    if(score === 5){
+        displayScore.textContent = `YOU WON THE GAME WITH 5 POINTS WOHOO`
+        score = 0
+    }
 }
 
 
-game()
+
+
+
+
+
